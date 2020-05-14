@@ -1,2 +1,2 @@
 # sagas-exemple
-ActionCreators Thunks Sagas example
+ActionCreators Thunks and Sagas example
