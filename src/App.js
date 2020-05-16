@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
-import fetchDog from "./redux-thunk";
+import { fetchDog } from "./action-creators";
 import "./App.scss";
 
 
@@ -33,11 +33,7 @@ const mapStateToProps = ({
   return { url, loading, error };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchDog: () => dispatch(fetchDog()) // диспатчим в Store функции а не объект с типом экшена
-  }
-};
+const mapDispatchToProps = { fetchDog }; // Dispatch of actionCreator
 
 export default connect(
   mapStateToProps,

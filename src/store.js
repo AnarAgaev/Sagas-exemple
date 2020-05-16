@@ -1,16 +1,23 @@
 import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import createSagaMiddleware from 'redux-saga'
 import reducer from "./reducer";
+import watchFetchDog from "./sagas";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   reducer,
 
   /*
-   * Промежуточный слой (applyMiddleware)
-   * автоматически передаёт функцию dispatch
-   * в фуркцию, которую возвращает action creator
+   * Вместо thunk в applyMiddleware передаём Middleware саги
    */
-  applyMiddleware(thunk)
+  applyMiddleware(sagaMiddleware)
 );
+
+/*
+ * Запускаем Middleware саги передавая в неё наблюдатель саги,
+ * который получив действие сам выполнить нужные функции
+ */
+sagaMiddleware.run(watchFetchDog);
 
 export default store;
